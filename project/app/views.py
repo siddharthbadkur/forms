@@ -46,7 +46,7 @@ def login(request):
                     contact = user.stu_mobile
                     city = user.stu_city
                     password = user.stu_password
-                    data = {
+                    data  =  {
                         'name':name,
                         'email':email,
                         'contact':contact,
@@ -59,10 +59,10 @@ def login(request):
                                 } 
                     form1=QueryForm(initial=initial_data)
                     query1=StudentQuery.objects.filter(stu_email=email)
-                    return render(request,'dashboard.html',{'data':data,'query':form1,'query1':query1})
+                    return render(request,'dashboard.html',{'data':data,'query':form1,'query1':query1 })
                 else:
                     msg = "Email & Password not matched"
-                    return render(request,'login.html',{'form':form,'msg':msg})
+                    return render(request,'login.html',{ 'form':form,'msg':msg })
             else:
                 msg = "Email not register so please register first"
                 return render(request,'login.html',{'form':form,'msg':msg})
@@ -159,6 +159,10 @@ def edit(request,pk):
                     'password':password
                 }
        return render(request,'dashboard.html',{'data':data,'form1':form1,'data1':data1})
+# def update(request,pk):
+#  print(pk) 
+# #update funtion is incomplete 
+    
     
     
   
