@@ -161,7 +161,7 @@ def edit(request,pk):
        return render(request,'dashboard.html',{'data':data,'form1':form1,'data1':data1})
 # def update(request,pk):
 #  print(pk) 
-# #update funtion is incomplete 
+ #update funtion incomplete
     
     
     
