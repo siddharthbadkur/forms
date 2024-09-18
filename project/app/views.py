@@ -28,6 +28,7 @@ def home(request):
     else:
         return render(request,'home.html',{"form":form})
 def login(request):
+    global data
     form = LoginForm()
     if request.method=="POST":
         data = LoginForm(request.POST)
@@ -46,13 +47,17 @@ def login(request):
                     contact = user.stu_mobile
                     city = user.stu_city
                     password = user.stu_password
-                    data  =  {
+
+                    data ={
                         'name':name,
                         'email':email,
                         'contact':contact,
                         'city':city,
                         'password':password
+
+
                     }
+                  
                     initial_data = {
                                     'stu_name': name,
                                     'stu_email': email
@@ -88,13 +93,7 @@ def query(request):
                 city = user.stu_city
                 password = user.stu_password
 
-                data = {
-                    'name':name,
-                    'email':email,
-                    'contact':contact,
-                    'city':city,
-                    'password':password
-                }
+           
                 initial_data = {
                                 'stu_name': name,
                                 'stu_email': email
@@ -115,26 +114,20 @@ def delete(request,pk):
                         'stu_email': email
                     } 
        form1=QueryForm(initial=initial_data)
-       data1 = StudentQuery.objects.filter(stu_email=email)
+       query1 = StudentQuery.objects.filter(stu_email=email)
        user1 = StudentModel.objects.get(stu_email=email)
        name = user1.stu_name
        email = user1.stu_email
        contact = user1.stu_mobile
        city = user1.stu_city
        password = user1.stu_password
-       data = {
-                    'name':name,
-                    'email':email,
-                    'contact':contact,
-                    'city':city,
-                    'password':password
-                }
-       return render(request,'dashboard.html',{'data':data,'query':form1,'data1':data1})
+    
+       return render(request,'dashboard.html',{'data':data,'query':form1,'query1':query1})
                 
 def edit(request,pk):
       form =QueryForm()
       if request.method=='POST': 
-       user=StudentQuery.objects.get(id=pk)
+       user=StudentQuery.objects.get(id=pk) 
        name=user.stu_name
        email=user.stu_email
        query=user.stu_query
@@ -151,16 +144,10 @@ def edit(request,pk):
        contact = user1.stu_mobile
        city = user1.stu_city
        password = user1.stu_password
-       data = {
-                    'name':name,
-                    'email':email,
-                    'contact':contact,
-                    'city':city,
-                    'password':password
-                }
+    
        return render(request,'dashboard.html',{'data':data,'form1':form1,'data1':data1,'pk':pk})
 def update(request,pk):
-     form = QueryForm()
+     form = QueryForm() 
      if request.method=="POST":
         old_data=StudentQuery.objects.get(id=pk)
         query_data = QueryForm(request.POST,instance=old_data) 
@@ -178,14 +165,7 @@ def update(request,pk):
                 contact = user.stu_mobile
                 city = user.stu_city
                 password = user.stu_password
-
-                data = {
-                    'name':name,
-                    'email':email,
-                    'contact':contact,
-                    'city':city,
-                    'password':password
-                }
+ 
                 initial_data = {
                                 'stu_name': name,
                                 'stu_email': email
